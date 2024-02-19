@@ -1,4 +1,5 @@
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from config import DESIRED_TIMES, URL
@@ -13,6 +14,7 @@ def init_browser():
 
 def login(driver):
     """Log in to the website."""
+    driver.find_element
     driver.find_element(By.ID, "username_field_id").send_keys(USERNAME)
     driver.find_element(By.ID, "password_field_id").send_keys(PASSWORD + Keys.RETURN)
 
