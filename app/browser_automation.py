@@ -5,6 +5,8 @@ from selenium import webdriver
 from config import DESIRED_TIMES, URL
 from selenium.webdriver.common.by import By
 from config import USERNAME, PASSWORD
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import datetime
 def init_browser():
     """Initialize the web browser."""
@@ -12,12 +14,17 @@ def init_browser():
     driver.get(URL)
     return driver
 
+
+#TODO: Find ID in website src code Error at line 20
 def login(driver):
     """Log in to the website."""
     driver.find_element
-    driver.find_element(By.ID, "username_field_id").send_keys(USERNAME)
-    driver.find_element(By.ID, "password_field_id").send_keys(PASSWORD + Keys.RETURN)
 
+    # Wait for the page to load
+    WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.NAME, "user")))
+
+    driver.find_element(By.NAME, "user").send_keys(USERNAME)
+    driver.find_element(By.NAME, "password").send_keys(PASSWORD + Keys.RETURN)
 
 def find_tee_time(driver):
     """Find an available tee time."""
